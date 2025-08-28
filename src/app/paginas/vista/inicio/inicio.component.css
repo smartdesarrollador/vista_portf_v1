@@ -1,0 +1,39 @@
+/* Portfolio Main Page Styles */
+
+.portfolio-main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling for section navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section spacing */
+.portfolio-main > * {
+  width: 100%;
+}
+
+/* Ensure full viewport sections */
+#hero {
+  min-height: 100vh;
+}
+
+/* Section transitions */
+.portfolio-main section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Performance optimizations */
+.portfolio-main {
+  will-change: scroll-position;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

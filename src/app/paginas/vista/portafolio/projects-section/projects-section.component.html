@@ -1,0 +1,318 @@
+<!-- Projects Section -->
+<section class="relative py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 overflow-hidden">
+  
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/3 left-1/4 w-72 h-72 bg-gradient-to-r from-blue-300/20 to-purple-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-l from-purple-300/20 to-pink-400/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="animate-pulse">
+      <div class="h-8 bg-gray-300 rounded w-1/3 mx-auto mb-4"></div>
+      <div class="h-4 bg-gray-300 rounded w-1/2 mx-auto mb-8"></div>
+      
+      <!-- Filter buttons skeleton -->
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <div *ngFor="let i of [1,2,3,4,5]" class="h-10 bg-gray-300 rounded-full w-20"></div>
+      </div>
+      
+      <!-- Projects grid skeleton -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let i of [1,2,3,4,5,6]" class="bg-gray-300 rounded-2xl h-80"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading && projectsData" class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        {{ projectsData.title }}
+      </h2>
+      <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+        {{ projectsData.subtitle }}
+      </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+      <button
+        *ngFor="let category of categories"
+        (click)="filterProjects(category)"
+        [class]="'filter-btn px-6 py-3 rounded-full font-semibold transition-all duration-300 ' + (selectedCategory === category ? 'active bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25' : 'bg-white/80 text-gray-700 hover:bg-white hover:shadow-md dark:bg-gray-800/80 dark:text-gray-300 dark:hover:bg-gray-700')"
+        [attr.data-category]="category">
+        <i [class]="getCategoryIcon(category)" class="mr-2"></i>
+        {{ category }}
+      </button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" #projectsGrid>
+      
+      <div *ngFor="let project of filteredProjects; let i = index" 
+           [attr.data-project-id]="project.id"
+           class="project-card group cursor-pointer"
+           (click)="openProjectModal(project)"
+           [attr.data-aos]="'fade-up'"
+           [attr.data-aos-delay]="i * 100">
+        
+        <!-- Featured Badge -->
+        <div *ngIf="project.isFeatured" 
+             class="absolute -top-3 -left-3 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+          <i class="fas fa-star mr-1"></i>
+          Destacado
+        </div>
+
+        <!-- Project Card -->
+        <div class="glass-card rounded-2xl overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl">
+          
+          <!-- Project Image -->
+          <div class="relative overflow-hidden aspect-video">
+            <img 
+              [src]="project.image" 
+              [alt]="project.title"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy">
+            
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <!-- Category Badge -->
+            <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+              <i [class]="getCategoryIcon(project.category)" class="mr-1"></i>
+              {{ project.category }}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+              <div class="flex gap-2">
+                <button *ngIf="project.liveUrl" 
+                        (click)="$event.stopPropagation(); openExternalLink(project.liveUrl!)"
+                        class="w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110">
+                  <i class="fas fa-external-link-alt text-sm"></i>
+                </button>
+                <button *ngIf="project.githubUrl" 
+                        (click)="$event.stopPropagation(); openExternalLink(project.githubUrl!)"
+                        class="w-10 h-10 bg-gray-800 hover:bg-gray-900 text-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110">
+                  <i class="fab fa-github text-sm"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Info -->
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
+              {{ project.title }}
+            </h3>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+              {{ project.description }}
+            </p>
+
+            <!-- Technologies -->
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span *ngFor="let tech of project.technologies" 
+                    [class]="'px-2 py-1 text-xs font-medium text-white rounded-full ' + getTechBadgeColor(tech)">
+                {{ tech }}
+              </span>
+            </div>
+
+            <!-- Project Meta -->
+            <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
+              <div *ngIf="project.completionDate" class="flex items-center">
+                <i class="fas fa-calendar-alt mr-1"></i>
+                {{ project.completionDate | date:'MMM yyyy' }}
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-eye mr-1"></i>
+                Ver detalles
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- No projects found -->
+    <div *ngIf="filteredProjects.length === 0" class="text-center py-16">
+      <div class="glass-card p-8 rounded-2xl max-w-md mx-auto">
+        <i class="fas fa-search text-4xl text-gray-400 mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          No se encontraron proyectos
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400">
+          No hay proyectos en la categoría "{{ selectedCategory }}"
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Project Detail Modal -->
+<div *ngIf="isModalOpen && selectedProject" 
+     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+     (click)="closeProjectModal()"
+     (keydown)="onModalKeydown($event)">
+  
+  <div class="relative w-full max-w-6xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-2xl"
+       (click)="$event.stopPropagation()">
+    
+    <!-- Close Button -->
+    <button (click)="closeProjectModal()" 
+            class="absolute top-4 right-4 z-30 w-10 h-10 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-all duration-200">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <!-- Modal Content -->
+    <div class="flex flex-col lg:flex-row h-full max-h-[90vh] overflow-hidden">
+      
+      <!-- Image Gallery -->
+      <div class="lg:w-2/3 relative bg-black">
+        <!-- Main Image -->
+        <div class="relative h-64 lg:h-full min-h-[400px] flex items-center justify-center">
+          <img 
+            [src]="selectedProject.gallery && selectedProject.gallery.length > 0 ? selectedProject.gallery[selectedImageIndex] : selectedProject.image" 
+            [alt]="selectedProject.title"
+            class="max-w-full max-h-full object-contain">
+          
+          <!-- Navigation Arrows -->
+          <div *ngIf="selectedProject.gallery && selectedProject.gallery.length > 1">
+            <button (click)="previousImage()" 
+                    class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-all duration-200">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button (click)="nextImage()" 
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-all duration-200">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <!-- Image Counter -->
+          <div *ngIf="selectedProject.gallery && selectedProject.gallery.length > 1"
+               class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+            {{ selectedImageIndex + 1 }} / {{ selectedProject.gallery.length }}
+          </div>
+        </div>
+
+        <!-- Thumbnail Gallery -->
+        <div *ngIf="selectedProject.gallery && selectedProject.gallery.length > 1"
+             class="absolute bottom-4 left-4 right-4 flex gap-2 overflow-x-auto">
+          <button *ngFor="let image of selectedProject.gallery; let i = index"
+                  (click)="selectedImageIndex = i"
+                  [class]="'flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ' + (i === selectedImageIndex ? 'border-white' : 'border-transparent opacity-60 hover:opacity-100')">
+            <img [src]="image" [alt]="'Imagen ' + (i + 1)" class="w-full h-full object-cover">
+          </button>
+        </div>
+      </div>
+
+      <!-- Project Details -->
+      <div class="lg:w-1/3 p-6 overflow-y-auto">
+        <div class="space-y-6">
+          
+          <!-- Project Header -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
+                <i [class]="getCategoryIcon(selectedProject.category)" class="mr-1"></i>
+                {{ selectedProject.category }}
+              </span>
+              <span *ngIf="selectedProject.isFeatured"
+                    class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full text-sm font-medium">
+                <i class="fas fa-star mr-1"></i>
+                Destacado
+              </span>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              {{ selectedProject.title }}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300">
+              {{ selectedProject.description }}
+            </p>
+          </div>
+
+          <!-- Technologies -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">
+              Tecnologías
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let tech of selectedProject.technologies" 
+                    [class]="'px-3 py-1 text-sm font-medium text-white rounded-full ' + getTechBadgeColor(tech)">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Features -->
+          <div *ngIf="selectedProject.features && selectedProject.features.length > 0">
+            <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">
+              Características
+            </h3>
+            <ul class="space-y-2">
+              <li *ngFor="let feature of selectedProject.features" 
+                  class="flex items-start text-sm text-gray-600 dark:text-gray-300">
+                <i class="fas fa-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>
+                {{ feature }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Project Meta -->
+          <div class="space-y-3">
+            <div *ngIf="selectedProject.client" class="flex items-center text-sm">
+              <span class="font-semibold text-gray-700 dark:text-gray-300 w-20">Cliente:</span>
+              <span class="text-gray-600 dark:text-gray-400">{{ selectedProject.client }}</span>
+            </div>
+            <div *ngIf="selectedProject.duration" class="flex items-center text-sm">
+              <span class="font-semibold text-gray-700 dark:text-gray-300 w-20">Duración:</span>
+              <span class="text-gray-600 dark:text-gray-400">{{ selectedProject.duration }}</span>
+            </div>
+            <div *ngIf="selectedProject.completionDate" class="flex items-center text-sm">
+              <span class="font-semibold text-gray-700 dark:text-gray-300 w-20">Fecha:</span>
+              <span class="text-gray-600 dark:text-gray-400">{{ selectedProject.completionDate | date:'MMM yyyy' }}</span>
+            </div>
+          </div>
+
+          <!-- Testimonial -->
+          <div *ngIf="selectedProject.testimonial" class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl">
+            <blockquote class="text-gray-700 dark:text-gray-300 italic mb-3">
+              "{{ selectedProject.testimonial.text }}"
+            </blockquote>
+            <cite class="text-sm font-semibold text-gray-600 dark:text-gray-400">
+              — {{ selectedProject.testimonial.author }}, {{ selectedProject.testimonial.position }}
+            </cite>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <button *ngIf="selectedProject.liveUrl" 
+                    (click)="openExternalLink(selectedProject.liveUrl!)"
+                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Ver Proyecto
+            </button>
+            <button *ngIf="selectedProject.githubUrl" 
+                    (click)="openExternalLink(selectedProject.githubUrl!)"
+                    class="flex-1 bg-gray-800 hover:bg-gray-900 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105">
+              <i class="fab fa-github mr-2"></i>
+              Ver Código
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

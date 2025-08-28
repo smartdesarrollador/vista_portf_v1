@@ -1,0 +1,202 @@
+<!-- Testimonials Section -->
+<section class="relative py-20 lg:py-32 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 overflow-hidden">
+  
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/3 w-96 h-96 bg-gradient-to-l from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-cyan-400/10 to-purple-400/10 rounded-full blur-2xl"></div>
+  </div>
+
+  <!-- Background grid pattern -->
+  <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="animate-pulse">
+      <div class="h-8 bg-white/20 rounded w-1/3 mx-auto mb-4"></div>
+      <div class="h-4 bg-white/20 rounded w-1/2 mx-auto mb-12"></div>
+      
+      <!-- Testimonial card skeleton -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white/10 rounded-2xl h-80 backdrop-blur-sm"></div>
+      </div>
+      
+      <!-- Controls skeleton -->
+      <div class="flex justify-center gap-4 mt-8">
+        <div class="w-12 h-12 bg-white/20 rounded-full"></div>
+        <div class="w-12 h-12 bg-white/20 rounded-full"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading && testimonialsData" class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+        {{ testimonialsData.title }}
+      </h2>
+      <p class="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+        {{ testimonialsData.subtitle }}
+      </p>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+      
+      <!-- Current Testimonial -->
+      <div *ngIf="currentTestimonial" class="relative">
+        
+        <!-- Testimonial Card -->
+        <div class="glass-card rounded-3xl p-8 lg:p-12 text-center testimonial-card">
+          
+          <!-- Quote Icon -->
+          <div class="flex justify-center mb-8">
+            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <i class="fas fa-quote-left text-white text-2xl"></i>
+            </div>
+          </div>
+
+          <!-- Testimonial Text -->
+          <blockquote class="text-xl lg:text-2xl text-white leading-relaxed mb-8 font-medium">
+            "{{ currentTestimonial.text }}"
+          </blockquote>
+
+          <!-- Rating Stars -->
+          <div class="flex justify-center gap-1 mb-6" *ngIf="currentTestimonial.rating">
+            <i *ngFor="let star of getStarArray(currentTestimonial.rating); let i = index"
+               [class]="'fas fa-star text-xl transition-all duration-300 ' + (star ? 'text-yellow-400' : 'text-gray-500')"
+               [style.animation-delay]="i * 0.1 + 's'"></i>
+          </div>
+
+          <!-- Client Info -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            
+            <!-- Client Avatar -->
+            <div class="relative">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-white/30 shadow-xl">
+                <img [src]="currentTestimonial.clientImage" 
+                     [alt]="currentTestimonial.clientName"
+                     class="w-full h-full object-cover"
+                     loading="lazy">
+              </div>
+              <!-- Verified badge for some testimonials -->
+              <div *ngIf="currentTestimonial.isVerified" 
+                   class="absolute -bottom-1 -right-1 w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center">
+                <i class="fas fa-check text-white text-xs"></i>
+              </div>
+            </div>
+
+            <!-- Client Details -->
+            <div class="text-center sm:text-left">
+              <h4 class="text-xl font-bold text-white mb-1">
+                {{ currentTestimonial.clientName }}
+              </h4>
+              <p class="text-gray-300 text-sm mb-1">
+                {{ currentTestimonial.clientPosition }}
+              </p>
+              <p class="text-gray-400 text-xs">
+                {{ currentTestimonial.clientCompany }}
+              </p>
+              <div *ngIf="currentTestimonial.projectDate" class="text-gray-500 text-xs mt-1">
+                <i class="fas fa-calendar-alt mr-1"></i>
+                {{ currentTestimonial.projectDate | date:'MMM yyyy' }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Reference -->
+          <div *ngIf="currentTestimonial.projectName" 
+               class="mt-6 pt-6 border-t border-white/20">
+            <p class="text-gray-300 text-sm">
+              <i class="fas fa-project-diagram mr-2"></i>
+              Proyecto: <span class="font-semibold text-white">{{ currentTestimonial.projectName }}</span>
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button *ngIf="testimonialsData.testimonials.length > 1"
+                (click)="previous()" 
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-8 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-10">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <button *ngIf="testimonialsData.testimonials.length > 1"
+                (click)="next()" 
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-8 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-10">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Carousel Controls -->
+    <div *ngIf="testimonialsData.testimonials.length > 1" 
+         class="flex justify-center items-center gap-6 mt-12" 
+         data-aos="fade-up" 
+         data-aos-duration="800" 
+         data-aos-delay="400">
+      
+      <!-- Dots Indicator -->
+      <div class="flex gap-2">
+        <button *ngFor="let testimonial of testimonialsData.testimonials; let i = index"
+                (click)="goToSlide(i)"
+                [class]="'w-3 h-3 rounded-full transition-all duration-300 ' + (i === currentIndex ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/60')"
+                [attr.aria-label]="'Ir al testimonio ' + (i + 1)">
+        </button>
+      </div>
+
+      <!-- Auto-play Toggle -->
+      <button (click)="toggleAutoPlay()"
+              [class]="'w-10 h-10 rounded-full backdrop-blur-sm border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 ' + (isAutoPlaying ? 'bg-white/20 text-white' : 'bg-white/10 text-gray-400')"
+              [attr.aria-label]="isAutoPlaying ? 'Pausar reproducción automática' : 'Activar reproducción automática'">
+        <i [class]="isAutoPlaying ? 'fas fa-pause' : 'fas fa-play'" class="text-sm"></i>
+      </button>
+
+    </div>
+
+    <!-- Additional Stats or Trust Indicators -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+      
+      <div class="text-center">
+        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-users text-white text-xl"></i>
+        </div>
+        <div class="text-3xl font-bold text-white mb-2">{{ testimonialsData.stats?.happyClients || '50+' }}</div>
+        <div class="text-gray-300 text-sm">Clientes Satisfechos</div>
+      </div>
+
+      <div class="text-center">
+        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-star text-white text-xl"></i>
+        </div>
+        <div class="text-3xl font-bold text-white mb-2">{{ testimonialsData.stats?.averageRating || '4.9' }}</div>
+        <div class="text-gray-300 text-sm">Calificación Promedio</div>
+      </div>
+
+      <div class="text-center">
+        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-project-diagram text-white text-xl"></i>
+        </div>
+        <div class="text-3xl font-bold text-white mb-2">{{ testimonialsData.stats?.completedProjects || '100+' }}</div>
+        <div class="text-gray-300 text-sm">Proyectos Completados</div>
+      </div>
+
+      <div class="text-center">
+        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-clock text-white text-xl"></i>
+        </div>
+        <div class="text-3xl font-bold text-white mb-2">{{ testimonialsData.stats?.yearsExperience || '5+' }}</div>
+        <div class="text-gray-300 text-sm">Años de Experiencia</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

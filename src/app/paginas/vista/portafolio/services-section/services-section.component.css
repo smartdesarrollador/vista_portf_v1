@@ -1,0 +1,290 @@
+/* Services Section Specific Styles */
+
+/* Background grid pattern */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Glass morphism for dark backgrounds */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Service Card Animations */
+.service-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  perspective: 1000px;
+}
+
+.service-card.animate-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 3D Hover Effects */
+.service-card:hover .glass-card {
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(147, 51, 234, 0.3);
+}
+
+.service-card .glass-card {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+}
+
+/* Enhanced Glass Effect on Hover */
+.service-card:hover .glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Icon Container Effects */
+.service-card .w-16.h-16 {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card .w-16.h-16::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, 
+    transparent,
+    rgba(59, 130, 246, 0.5),
+    rgba(147, 51, 234, 0.5),
+    rgba(236, 72, 153, 0.5),
+    transparent
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.service-card:hover .w-16.h-16::before {
+  opacity: 1;
+  animation: rotate-border 2s linear infinite;
+}
+
+@keyframes rotate-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Button Hover Effects */
+.btn-service {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-service::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn-service:hover::before {
+  left: 100%;
+}
+
+/* Enhanced CTA Buttons */
+.btn-primary,
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary::after,
+.btn-secondary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.btn-primary:hover::after,
+.btn-secondary:hover::after {
+  width: 200%;
+  height: 200%;
+}
+
+/* Staggered Animation Delays */
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.3s; }
+.service-card:nth-child(3) { animation-delay: 0.5s; }
+
+/* Feature List Animations */
+.service-card ul li {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.service-card.animate-card ul li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.service-card.animate-card ul li:nth-child(1) { transition-delay: 0.6s; }
+.service-card.animate-card ul li:nth-child(2) { transition-delay: 0.7s; }
+.service-card.animate-card ul li:nth-child(3) { transition-delay: 0.8s; }
+.service-card.animate-card ul li:nth-child(4) { transition-delay: 0.9s; }
+
+/* Popular Badge Animation */
+.service-card .absolute.-top-3 {
+  animation: badge-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes badge-glow {
+  0% {
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.8),
+                0 0 30px rgba(251, 191, 36, 0.4);
+  }
+}
+
+/* Gradient Text Effects */
+.group:hover h3.group-hover\:text-transparent {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.group:hover .group-hover\:text-transparent {
+  background-size: 200% 200%;
+  animation: gradient-shift 2s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced Box Shadows */
+.service-card:hover {
+  filter: brightness(1.1);
+}
+
+.service-card .glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.3), 
+    transparent, 
+    rgba(147, 51, 234, 0.3)
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover .glass-card::after {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .service-card:hover .glass-card {
+    transform: translateY(-5px);
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-card .glass-card {
+    padding: 1.5rem;
+  }
+  
+  .service-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .flex.flex-col.sm\:flex-row {
+    flex-direction: column;
+  }
+}
+
+/* Performance optimizations */
+.service-card,
+.glass-card,
+.btn-service,
+.btn-primary,
+.btn-secondary {
+  will-change: transform;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .glass-card,
+  .btn-service,
+  .animate-pulse,
+  .group-hover\:animate-pulse,
+  .group-hover\:animate-bounce {
+    animation: none;
+    transition: none;
+  }
+  
+  .service-card:hover .glass-card {
+    transform: none;
+  }
+}
+
+/* Loading state enhancements */
+.animate-pulse > div {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
+}
