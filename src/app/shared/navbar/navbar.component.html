@@ -87,14 +87,14 @@
       <!-- Botones de acción -->
       <div class="hidden md:flex items-center">
         <!-- Botón de acceso para usuarios no autenticados -->
-        <button
+        <!--  <button
           *ngIf="!currentUser"
           routerLink="/auth/login"
           class="ml-3 hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300"
           [style.background-color]="colorPrimario"
         >
           Acceder
-        </button>
+        </button> -->
 
         <!-- Menú de usuario para usuarios autenticados -->
         <div *ngIf="currentUser" class="relative ml-3">
@@ -253,7 +253,7 @@
       >
 
       <!-- Botón de acceso (versión móvil) -->
-      <div *ngIf="!currentUser">
+      <!-- <div *ngIf="!currentUser">
         <button
           routerLink="/auth/login"
           class="w-full mt-2 hover:bg-opacity-90 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300"
@@ -261,7 +261,7 @@
         >
           Acceder
         </button>
-      </div>
+      </div> -->
 
       <!-- Opciones de usuario (versión móvil) -->
       <div

@@ -20,12 +20,12 @@ export class FooterComponent implements OnInit {
   // Variables para configuraciones
   configuraciones: ConfiguracionesTodas | null = null;
   logoUrl: string = '';
-  nombreSitio: string = 'Mi Aplicación';
+  nombreSitio: string = 'JEANS ENRIQUE MALON REYNA';
 
   // Datos de contacto
-  direccion: string = 'Av. Principal, Ciudad, País';
-  telefono: string = '+1 234 567 890';
-  email: string = 'info@miapp.com';
+  direccion: string = 'Lima, Perú';
+  telefono: string = '955365043';
+  email: string = 'sistema5000smart@gmail.com';
 
   // Colores
   colorPrimario: string = '#3B82F6';

@@ -198,7 +198,9 @@ export class ConfiguracionesService {
     if (!this.configuracionesCache$) {
       // Check if we should use mock data
       if (environment.portfolio?.useMockData) {
-        this.configuracionesCache$ = this.getMockConfiguraciones().pipe(shareReplay(1));
+        this.configuracionesCache$ = this.getMockConfiguraciones().pipe(
+          shareReplay(1)
+        );
       } else {
         // URL pública sin autenticación
         const url = `${environment.apiUrl}/configuraciones/todas`;
@@ -208,7 +210,10 @@ export class ConfiguracionesService {
           .pipe(
             shareReplay(1),
             catchError((error) => {
-              console.error('Error al obtener todas las configuraciones', error);
+              console.error(
+                'Error al obtener todas las configuraciones',
+                error
+              );
               this.configuracionesCache$ = undefined; // Resetear caché en caso de error
               return throwError(
                 () =>
@@ -266,22 +271,23 @@ export class ConfiguracionesService {
    */
   private getMockConfiguraciones(): Observable<ConfiguracionesTodas> {
     const mockData: ConfiguracionesTodas = {
-      'nombre_sitio': 'Mi Portafolio',
-      'descripcion_sitio': 'Portafolio profesional de desarrollo web',
-      'logo_header': '/assets/images/logo.png',
-      'logo_footer': '/assets/images/logo-footer.png',
-      'color_primario': '#3b82f6',
-      'color_secundario': '#8b5cf6',
-      'email_contacto': 'contacto@miportafolio.com',
-      'telefono_contacto': '+1 234 567 8900',
-      'direccion': 'Ciudad, País',
-      'facebook': 'https://facebook.com/usuario',
-      'twitter': 'https://twitter.com/usuario',
-      'linkedin': 'https://linkedin.com/in/usuario',
-      'instagram': 'https://instagram.com/usuario',
-      'github': 'https://github.com/usuario',
-      'meta_descripcion': 'Desarrollador Full Stack especializado en tecnologías modernas',
-      'meta_keywords': 'desarrollo web, angular, react, laravel, portfolio'
+      nombre_sitio: 'Mi Portafolio',
+      descripcion_sitio: 'Portafolio profesional de desarrollo web',
+      logo_header: '/assets/images/logo.png',
+      logo_footer: '/assets/images/logo-footer.png',
+      color_primario: '#3b82f6',
+      color_secundario: '#8b5cf6',
+      email_contacto: 'sistemadesignstyle@gmail.com',
+      telefono_contacto: '+51 955365043',
+      direccion: 'Lima, Perú',
+      facebook: 'https://facebook.com/usuario',
+      twitter: 'https://twitter.com/usuario',
+      linkedin: 'https://linkedin.com/in/usuario',
+      instagram: 'https://instagram.com/usuario',
+      github: 'https://github.com/usuario',
+      meta_descripcion:
+        'Desarrollador Full Stack especializado en tecnologías modernas',
+      meta_keywords: 'desarrollo web, angular, react, laravel, portfolio',
     };
 
     return of(mockData);

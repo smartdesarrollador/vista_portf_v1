@@ -140,17 +140,17 @@ export class PortfolioService {
   // Mock Data Generators
   private getMockHeroData(): HeroData {
     return {
-      name: "Alex Rivera",
+      name: "JEANS ENRIQUE MALON REYNA",
       role: "Full Stack Developer & UI/UX Designer",
       tagline: "Transformo ideas en experiencias digitales excepcionales",
-      description: "Especializado en desarrollo web moderno con Angular, React, Laravel y diseño centrado en el usuario.",
-      profileImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      description: "Especializado en desarrollo web moderno con Angular, React, Laravel y diseño centrado en el usuario. Desde Lima, Perú, ofrezco soluciones tecnológicas innovadoras.",
+      profileImage: "assets/foto/perfil.png",
       backgroundVideo: `${environment.portfolio.videosPath}/code-animation.mp4`,
       socialLinks: {
-        github: "https://github.com/alexrivera",
-        linkedin: "https://linkedin.com/in/alexrivera",
-        twitter: "https://twitter.com/alexrivera_dev",
-        email: "alex@riveradev.com"
+        github: "https://github.com/jeans",
+        linkedin: "https://linkedin.com/in/jeans-malon",
+        twitter: "https://twitter.com/jeans_dev",
+        email: "sistema5000smart@gmail.com"
       },
       stats: {
         projectsCompleted: 50,
@@ -237,6 +237,33 @@ export class PortfolioService {
           features: ["Wireframes", "Prototipos", "Design System", "User Testing"],
           price: "Desde $400",
           duration: "1-2 semanas"
+        },
+        {
+          id: 4,
+          icon: "fas fa-paint-brush",
+          title: "Diseño Gráfico",
+          description: "Diseños creativos para fortalecer la identidad visual de tu marca",
+          features: ["Logotipos", "Branding", "Material Publicitario", "Diseño Web"],
+          price: "Desde $300",
+          duration: "1-2 semanas"
+        },
+        {
+          id: 5,
+          icon: "fas fa-desktop",
+          title: "Instalación de Programas por Remoto",
+          description: "Asistencia técnica remota para instalación y configuración de software",
+          features: ["Soporte Remoto", "Configuración", "Capacitación", "Mantenimiento"],
+          price: "Desde $50",
+          duration: "1-2 días"
+        },
+        {
+          id: 6,
+          icon: "fas fa-robot",
+          title: "Asesoría en Inteligencia Artificial",
+          description: "Consultoría especializada en herramientas de IA para pequeñas y medianas empresas",
+          features: ["Evaluación de Necesidades", "Implementación IA", "Capacitación", "Optimización de Procesos"],
+          price: "Desde $500",
+          duration: "1-3 semanas"
         }
       ]
     };
@@ -249,7 +276,7 @@ export class PortfolioService {
       featured: [
         {
           id: 1,
-          title: "E-commerce Platform",
+          title: "Tienda Virtual",
           category: "Full Stack",
           description: "Plataforma completa de comercio electrónico con panel administrativo",
           image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
@@ -265,16 +292,16 @@ export class PortfolioService {
             "Pasarela de pagos integrada",
             "Sistema de inventario"
           ],
-          liveUrl: "https://demo-ecommerce.riveradev.com",
-          githubUrl: "https://github.com/alexrivera/ecommerce-platform",
-          client: "TechStore Inc.",
+          liveUrl: "https://tienda.smartdigitaltec.com",
+          githubUrl: "https://github.com/jeans/tienda-virtual",
+          client: "SmartDigitalTec",
           completionDate: "2024-03-15",
           duration: "3 meses",
           isFeatured: true,
           testimonial: {
-            text: "Alex entregó exactamente lo que necesitábamos y más.",
+            text: "Jeans entregó exactamente lo que necesitábamos y más.",
             author: "María González",
-            position: "CEO, TechStore Inc."
+            position: "CEO, SmartDigitalTec"
           }
         }
       ],
@@ -282,23 +309,53 @@ export class PortfolioService {
       projects: [
         {
           id: 2,
-          title: "Task Management App",
+          title: "Landing Page",
           category: "Frontend",
-          description: "Aplicación de gestión de tareas con interfaz intuitiva",
+          description: "Página de aterrizaje moderna con interfaz atractiva",
           image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
-          technologies: ["React", "Redux", "Firebase"],
-          liveUrl: "https://taskapp.riveradev.com",
-          githubUrl: "https://github.com/alexrivera/task-manager"
+          technologies: ["Angular", "Tailwind CSS", "TypeScript"],
+          liveUrl: "https://landingpage.smartdigitaltec.com",
+          githubUrl: "https://github.com/jeans/landing-page"
         },
         {
           id: 3,
-          title: "Portfolio Website",
+          title: "Web Informativa",
           category: "UI/UX",
-          description: "Diseño y desarrollo de portafolio personal con animaciones",
+          description: "Sitio web informativo corporativo con diseño profesional",
           image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-          technologies: ["Angular", "GSAP", "Tailwind CSS"],
-          liveUrl: "https://portfolio.riveradev.com",
-          githubUrl: "https://github.com/alexrivera/portfolio"
+          technologies: ["Angular", "Bootstrap", "Tailwind CSS"],
+          liveUrl: "https://webinformativa.smartdigitaltec.com",
+          githubUrl: "https://github.com/jeans/web-informativa"
+        },
+        {
+          id: 4,
+          title: "Blog Corporativo",
+          category: "Full Stack",
+          description: "Plataforma de blog con sistema de gestión de contenidos",
+          image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&h=600&fit=crop",
+          technologies: ["Angular", "Laravel", "MySQL", "CKEditor"],
+          liveUrl: "https://blog.smartdigitaltec.com",
+          githubUrl: "https://github.com/jeans/blog-corporativo"
+        },
+        {
+          id: 5,
+          title: "EVV Consultoría",
+          category: "Full Stack",
+          description: "Plataforma web de consultoría empresarial",
+          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+          technologies: ["Angular", "Laravel", "PostgreSQL", "Tailwind CSS"],
+          liveUrl: "https://evv.pe",
+          githubUrl: "https://github.com/jeans/evv-consultoria"
+        },
+        {
+          id: 6,
+          title: "One Digital Consulting",
+          category: "Frontend",
+          description: "Plataforma de cursos online con sistema de gestión de aprendizaje",
+          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
+          technologies: ["Angular", "Node.js", "MongoDB", "Socket.io"],
+          liveUrl: "https://onedigitallconsulting.com",
+          githubUrl: "https://github.com/jeans/cursos-online"
         }
       ]
     };
@@ -394,10 +451,10 @@ export class PortfolioService {
       title: "¿Trabajamos juntos?",
       subtitle: "Estoy disponible para nuevos proyectos y colaboraciones",
       contactInfo: {
-        email: "alex@riveradev.com",
-        phone: "+1 (555) 123-4567",
-        location: "San Francisco, CA",
-        timezone: "PST (UTC-8)",
+        email: "sistema5000smart@gmail.com",
+        phone: "955365043",
+        location: "Lima, Perú",
+        timezone: "PET (UTC-5)",
         availability: "Disponible para proyectos"
       },
       form: {
@@ -410,11 +467,11 @@ export class PortfolioService {
         ]
       },
       socialLinks: {
-        github: "https://github.com/alexrivera",
-        linkedin: "https://linkedin.com/in/alexrivera",
-        twitter: "https://twitter.com/alexrivera_dev",
-        instagram: "https://instagram.com/alexrivera.dev",
-        email: "alex@riveradev.com"
+        github: "https://github.com/jeans",
+        linkedin: "https://linkedin.com/in/jeans-malon",
+        twitter: "https://twitter.com/jeans_dev",
+        instagram: "https://instagram.com/jeans.dev",
+        email: "sistema5000smart@gmail.com"
       }
     };
   }

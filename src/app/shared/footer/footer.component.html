@@ -171,6 +171,15 @@
             <span [style.color]="colorTextoDim">{{ telefono }}</span>
           </li>
           <li class="flex items-start">
+            <i class="fab fa-whatsapp text-green-500 h-5 w-5 mr-2 mt-0.5"></i>
+            <a [href]="'https://wa.me/51' + telefono" 
+               target="_blank" 
+               [style.color]="colorTextoDim"
+               class="hover:text-green-400 transition-colors duration-200">
+              WhatsApp: {{ telefono }}
+            </a>
+          </li>
+          <li class="flex items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5 mr-2 mt-0.5"
