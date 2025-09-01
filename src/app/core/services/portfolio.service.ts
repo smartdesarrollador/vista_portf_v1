@@ -281,9 +281,9 @@ export class PortfolioService {
           description: "Plataforma completa de comercio electrónico con panel administrativo",
           image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
           gallery: [
-            `${environment.portfolio.projectImagesPath}/ecommerce-1.jpg`,
-            `${environment.portfolio.projectImagesPath}/ecommerce-2.jpg`,
-            `${environment.portfolio.projectImagesPath}/ecommerce-3.jpg`
+            "assets/proyectos/tienda/tienda_virtual_1.jpg",
+            "assets/proyectos/tienda/tienda_virtual_2.jpg", 
+            "assets/proyectos/tienda/tienda_virtual_3.jpg"
           ],
           technologies: ["Angular 18", "Laravel 10", "MySQL", "Tailwind CSS"],
           features: [
