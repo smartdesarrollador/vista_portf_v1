@@ -197,6 +197,12 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
     }
   }
 
+  openDigitalCV(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.open('https://cv-jeans.smartdigitaltec.com', '_blank', 'noopener noreferrer');
+    }
+  }
+
   downloadCV(): void {
     // TODO: Implement CV download functionality
     console.log('Downloading CV...');
