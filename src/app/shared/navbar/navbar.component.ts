@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
 
   // Variables para las configuraciones
   configuraciones: ConfiguracionesTodas | null = null;
-  logoUrl: string = '';
+  // logoUrl: string = '';
   nombreSitio: string = 'Mi Aplicación';
   colorPrimario: string = '#3B82F6'; // Valor por defecto
   colorTexto: string = '#1F2937'; // Valor por defecto
@@ -95,7 +95,7 @@ export class NavbarComponent implements OnInit {
         this.colorEnlaces = configuraciones['color_enlaces'] || '#2563EB';
 
         // Obtener URL del logo
-        this.cargarLogoUrl();
+        // this.cargarLogoUrl();
 
         // Aplicar estilos CSS dinámicamente
         this.aplicarEstilos();
@@ -106,15 +106,15 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  cargarLogoUrl(): void {
-    if (this.configuraciones && this.configuraciones['logo_principal']) {
-      this.configuracionesService
-        .getImagenUrl('logo_principal')
-        .subscribe((url) => {
-          this.logoUrl = url;
-        });
-    }
-  }
+  // cargarLogoUrl(): void {
+  //   if (this.configuraciones && this.configuraciones['logo_principal']) {
+  //     this.configuracionesService
+  //       .getImagenUrl('logo_principal')
+  //       .subscribe((url) => {
+  //         this.logoUrl = url;
+  //       });
+  //   }
+  // }
 
   aplicarEstilos(): void {
     // Solo ejecutar en el navegador
